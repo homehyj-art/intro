@@ -9,10 +9,7 @@
 
   body {
     font-family: 'Nanum Pen Script', cursive;
-    background-color: #fff0f5;
-    background-image: url('https://i.imgur.com/4YgZT07.png'); /* 귀여운 수박 아이콘 */
-    background-repeat: repeat;
-    background-size: 80px 80px;
+    background-color: #ffe4e1; /* 부드러운 분홍 단색 */
     padding: 20px;
     margin: 0;
     min-height: 100vh;
@@ -27,10 +24,10 @@
   }
 
   .input-container {
-    background: #ffe4eccc;
+    background: #fff0f5;
     border-radius: 20px;
     padding: 20px;
-    max-width: 420px;
+    max-width: 480px;
     margin: 0 auto 30px;
     box-shadow: 0 5px 15px rgba(255,105,145,0.3);
   }
@@ -70,20 +67,26 @@
   }
 
   #introList {
-    max-width: 600px;
+    max-width: 960px;
     margin: 0 auto;
-    max-height: 450px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-height: 600px;
     overflow-y: auto;
+    padding-bottom: 15px;
   }
 
   .card {
     background: #fff;
     border-radius: 25px;
     padding: 20px;
-    margin-bottom: 15px;
     box-shadow: 0 4px 15px rgba(255,105,145,0.2);
     position: relative;
     font-size: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .card h3 {
@@ -94,10 +97,12 @@
   .card p {
     margin: 4px 0;
     color: #555;
+    word-break: keep-all;
   }
 
   .actions {
     margin-top: 12px;
+    text-align: right;
   }
 
   .actions button {
@@ -105,7 +110,7 @@
     background: none;
     cursor: pointer;
     font-size: 1.5rem;
-    margin-right: 15px;
+    margin-left: 10px;
     transition: transform 0.15s ease;
   }
 
@@ -121,7 +126,6 @@
     color: #aaa;
   }
 
-  /* 좋아요 애니메이션 */
   .like-animate {
     animation: like-pop 0.4s ease forwards;
   }
@@ -130,6 +134,14 @@
     0% { transform: scale(1); color: #ff6f91; }
     50% { transform: scale(1.6); color: #ff416c; }
     100% { transform: scale(1); color: #ff6f91; }
+  }
+
+  /* 모바일 대응: 카드 최소 크기 줄임 */
+  @media (max-width: 600px) {
+    #introList {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      max-height: 500px;
+    }
   }
 </style>
 </head>
@@ -226,9 +238,9 @@
 
         card.innerHTML = `
           <h3>${escapeHtml(data.name)}</h3>
-          <p>취미: ${escapeHtml(data.hobby)}</p>
-          <p>특기: ${escapeHtml(data.skill)}</p>
-          <p>자기소개: ${escapeHtml(data.intro)}</p>
+          <p><b>취미:</b> ${escapeHtml(data.hobby)}</p>
+          <p><b>특기:</b> ${escapeHtml(data.skill)}</p>
+          <p><b>자기소개:</b> ${escapeHtml(data.intro)}</p>
           <div class="actions">
             <button class="like-btn" title="좋아요" data-id="${id}">👍 ${data.likes || 0}</button>
             <button class="delete-btn" title="삭제" data-id="${id}">🗑️</button>
