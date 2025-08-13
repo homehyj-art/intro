@@ -1,210 +1,311 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>우리 반 자기소개</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>💖 우리 반 자기소개</title>
 <style>
-    body {
-        font-family: 'Comic Sans MS', cursive;
-        background-color: #fff8e7;
-        background-image: url('https://cdn.pixabay.com/photo/2016/03/31/19/58/watermelon-1292272_1280.png');
-        background-size: 150px;
-        background-repeat: repeat;
-        padding: 20px;
-        text-align: center;
-    }
-    h1 {
-        color: #ff6f61;
-    }
-    .input-container {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        max-width: 400px;
-        margin: auto;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-    }
-    input, textarea, button {
-        width: 90%;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-    button {
-        background-color: #ffb347;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-    }
-    button:hover {
-        background-color: #ff944d;
-    }
-    .card {
-        background: white;
-        border-radius: 15px;
-        padding: 15px;
-        margin: 15px auto;
-        max-width: 500px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-        text-align: left;
-    }
-    .btn-container {
-        display: flex;
-        gap: 10px;
-        margin-top: 8px;
-    }
-    .like-btn {
-        background-color: #ff6f61;
-        color: white;
-    }
-    .delete-btn {
-        background-color: #888;
-        color: white;
-    }
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+  body {
+    font-family: 'Nanum Pen Script', cursive;
+    background-color: #fff0f5;
+    background-image: url('https://i.ibb.co/k4v4Qxr/cute-bg.png'); /* 귀여운 배경 패턴 */
+    background-repeat: repeat;
+    background-size: 180px;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ff6f91;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px #fce4ec;
+  }
+
+  .input-container {
+    background: #ffe4eccc;
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 420px;
+    margin: 0 auto 30px;
+    box-shadow: 0 5px 15px rgba(255,105,145,0.3);
+  }
+
+  input, textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 15px;
+    border: 2px solid #ffb6c1;
+    display: block;
+    font-size: 1.1rem;
+    outline: none;
+  }
+  textarea {
+    height: 70px;
+    resize: none;
+  }
+
+  button {
+    background-color: #ff6f91;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  button:hover {
+    background-color: #ff4d72;
+  }
+
+  #introList {
+    max-width: 600px;
+    margin: 0 auto;
+    max-height: 450px;
+    overflow-y: auto;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 25px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(255,105,145,0.2);
+    position: relative;
+    font-size: 1.15rem;
+  }
+
+  .card h3 {
+    color: #ff6f91;
+    margin: 0 0 6px 0;
+  }
+
+  .card p {
+    margin: 4px 0;
+    color: #555;
+  }
+
+  .actions {
+    margin-top: 12px;
+  }
+
+  .actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 12px;
+    transition: transform 0.15s ease;
+  }
+
+  .actions button:hover {
+    transform: scale(1.2);
+  }
+
+  .like-btn {
+    color: #ff6f91;
+  }
+
+  .delete-btn {
+    color: #aaa;
+  }
+
+  /* 좋아요 애니메이션 */
+  .like-animate {
+    animation: like-pop 0.4s ease forwards;
+  }
+
+  @keyframes like-pop {
+    0% { transform: scale(1); color: #ff6f91; }
+    50% { transform: scale(1.6); color: #ff416c; }
+    100% { transform: scale(1); color: #ff6f91; }
+  }
 </style>
 </head>
 <body>
 
-<h1>📢 우리 반 자기소개</h1>
+<h1>우리 반 자기소개 💌</h1>
+
 <div class="input-container">
-    <input type="text" id="name" placeholder="이름">
-    <input type="text" id="hobby" placeholder="취미">
-    <input type="text" id="specialty" placeholder="특기">
-    <textarea id="intro" placeholder="간단한 자기소개"></textarea>
-    <button onclick="addIntro()">자기소개 올리기</button>
+  <input type="text" id="nameInput" placeholder="이름을 입력하세요" maxlength="15" />
+  <input type="text" id="hobbyInput" placeholder="취미를 입력하세요" maxlength="30" />
+  <input type="text" id="skillInput" placeholder="특기를 입력하세요" maxlength="30" />
+  <textarea id="introInput" placeholder="간단한 자기소개를 작성하세요 (최대 100자)" maxlength="100"></textarea>
+  <button id="postBtn">자기소개 올리기</button>
 </div>
 
 <div id="introList"></div>
 
-<!-- Firebase -->
+<!-- Firebase JS -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getDatabase, ref, push, set, onValue, remove, get, update } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCtBTzq6aIgRzWDB2gfG2LBK19Y4TYCj4w",
-  authDomain: "summer-memory-bc163.firebaseapp.com",
-  databaseURL: "https://summer-memory-bc163-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "summer-memory-bc163",
-  storageBucket: "summer-memory-bc163.firebasestorage.app",
-  messagingSenderId: "1014179818008",
-  appId: "1:1014179818008:web:4570325a33a90582d2b16d"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyCtBTzq6aIgRzWDB2gfG2LBK19Y4TYCj4w",
+    authDomain: "summer-memory-bc163.firebaseapp.com",
+    databaseURL: "https://summer-memory-bc163-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "summer-memory-bc163",
+    storageBucket: "summer-memory-bc163.firebasestorage.app",
+    messagingSenderId: "1014179818008",
+    appId: "1:1014179818008:web:4570325a33a90582d2b16d"
+  };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-let currentUserName = "";
+  let currentUserName = "";
 
-function addIntro() {
-    const name = document.getElementById("name").value.trim();
-    const hobby = document.getElementById("hobby").value.trim();
-    const specialty = document.getElementById("specialty").value.trim();
-    const intro = document.getElementById("intro").value.trim();
+  const postBtn = document.getElementById("postBtn");
+  postBtn.addEventListener("click", () => {
+    const name = document.getElementById("nameInput").value.trim();
+    const hobby = document.getElementById("hobbyInput").value.trim();
+    const skill = document.getElementById("skillInput").value.trim();
+    const intro = document.getElementById("introInput").value.trim();
 
-    if (!name || !intro) {
-        alert("이름과 자기소개를 입력해주세요.");
-        return;
+    if (!name) {
+      alert("이름을 입력해주세요!");
+      return;
+    }
+    if (!hobby) {
+      alert("취미를 입력해주세요!");
+      return;
+    }
+    if (!skill) {
+      alert("특기를 입력해주세요!");
+      return;
+    }
+    if (!intro) {
+      alert("자기소개를 작성해주세요!");
+      return;
     }
 
     currentUserName = name;
 
-    const introRef = push(ref(db, "introductions"));
-    set(introRef, {
-        name: name,
-        hobby: hobby,
-        specialty: specialty,
-        intro: intro,
-        likes: 0,
-        likedBy: {},
-        author: name
+    const newRef = push(ref(db, "introductions"));
+    set(newRef, {
+      name: name,
+      hobby: hobby,
+      skill: skill,
+      intro: intro,
+      likes: 0,
+      likedBy: {},
+      author: name
     });
 
-    document.getElementById("name").value = "";
-    document.getElementById("hobby").value = "";
-    document.getElementById("specialty").value = "";
-    document.getElementById("intro").value = "";
-}
+    // 입력창 초기화
+    document.getElementById("nameInput").value = "";
+    document.getElementById("hobbyInput").value = "";
+    document.getElementById("skillInput").value = "";
+    document.getElementById("introInput").value = "";
+  });
 
-function renderList() {
-    const introRef = ref(db, "introductions");
-    onValue(introRef, (snapshot) => {
-        const list = document.getElementById("introList");
-        list.innerHTML = "";
-        snapshot.forEach((child) => {
-            const data = child.val();
-            const id = child.key;
+  function renderComments() {
+    const listRef = ref(db, "introductions");
+    const list = document.getElementById("introList");
 
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `
-                <strong>이름:</strong> ${data.name} <br>
-                <strong>취미:</strong> ${data.hobby || "없음"} <br>
-                <strong>특기:</strong> ${data.specialty || "없음"} <br>
-                <strong>자기소개:</strong> ${data.intro} <br>
-                <strong>좋아요:</strong> ${data.likes} 👍
-            `;
+    onValue(listRef, (snapshot) => {
+      list.innerHTML = "";
+      snapshot.forEach((childSnap) => {
+        const data = childSnap.val();
+        const id = childSnap.key;
 
-            const btnContainer = document.createElement("div");
-            btnContainer.className = "btn-container";
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-            const likeBtn = document.createElement("button");
-            likeBtn.className = "like-btn";
-            likeBtn.innerText = "👍 좋아요";
-            likeBtn.onclick = () => likeIntro(id, currentUserName);
+        card.innerHTML = `
+          <h3>${escapeHtml(data.name)}</h3>
+          <p>취미: ${escapeHtml(data.hobby)}</p>
+          <p>특기: ${escapeHtml(data.skill)}</p>
+          <p>자기소개: ${escapeHtml(data.intro)}</p>
+          <div class="actions">
+            <button class="like-btn" title="좋아요" data-id="${id}">👍 ${data.likes || 0}</button>
+            <button class="delete-btn" title="삭제" data-id="${id}">🗑️</button>
+          </div>
+        `;
 
-            const deleteBtn = document.createElement("button");
-            deleteBtn.className = "delete-btn";
-            deleteBtn.innerText = "삭제";
-            deleteBtn.onclick = () => deleteIntro(id, currentUserName);
+        list.appendChild(card);
+      });
 
-            btnContainer.appendChild(likeBtn);
-            btnContainer.appendChild(deleteBtn);
-            card.appendChild(btnContainer);
-            list.appendChild(card);
-        });
-    });
-}
-
-function likeIntro(id, userName) {
-    const introRef = ref(db, "introductions/" + id);
-    get(introRef).then((snapshot) => {
-        if (snapshot.exists()) {
+      // 좋아요 버튼 이벤트
+      document.querySelectorAll(".like-btn").forEach(btn => {
+        btn.onclick = async () => {
+          if (!currentUserName) {
+            alert("먼저 자기소개를 올려주세요!");
+            return;
+          }
+          const commentId = btn.getAttribute("data-id");
+          const commentRef = ref(db, "introductions/" + commentId);
+          const snapshot = await get(commentRef);
+          if (snapshot.exists()) {
             const data = snapshot.val();
+            if (data.likedBy && data.likedBy[currentUserName]) {
+              alert("이미 좋아요를 누르셨어요!");
+              return;
+            }
             const likedBy = data.likedBy || {};
-
-            if (likedBy[userName]) {
-                alert("이미 좋아요를 누르셨습니다!");
-                return;
-            }
-
-            likedBy[userName] = true;
-            update(introRef, {
-                likes: (data.likes || 0) + 1,
-                likedBy: likedBy
+            likedBy[currentUserName] = true;
+            await update(commentRef, {
+              likes: (data.likes || 0) + 1,
+              likedBy: likedBy
             });
-        }
-    });
-}
+            // 애니메이션 효과
+            btn.classList.add("like-animate");
+            setTimeout(() => btn.classList.remove("like-animate"), 400);
+          }
+        };
+      });
 
-function deleteIntro(id, userName) {
-    const introRef = ref(db, "introductions/" + id);
-    get(introRef).then((snapshot) => {
-        if (snapshot.exists()) {
+      // 삭제 버튼 이벤트
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.onclick = async () => {
+          if (!currentUserName) {
+            alert("먼저 자기소개를 올려주세요!");
+            return;
+          }
+          const commentId = btn.getAttribute("data-id");
+          const commentRef = ref(db, "introductions/" + commentId);
+          const snapshot = await get(commentRef);
+          if (snapshot.exists()) {
             const data = snapshot.val();
-            if (data.author !== userName) {
-                alert("작성자만 삭제할 수 있습니다!");
-                return;
+            if (data.author !== currentUserName) {
+              alert("본인만 삭제할 수 있어요!");
+              return;
             }
-            remove(introRef);
-        }
+            if (confirm("정말 삭제하시겠어요?")) {
+              await remove(commentRef);
+            }
+          }
+        };
+      });
     });
-}
+  }
 
-renderList();
+  // XSS 방지용 간단 escape 함수
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function(m) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[m];
+    });
+  }
+
+  renderComments();
 </script>
 
 </body>
