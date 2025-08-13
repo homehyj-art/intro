@@ -8,7 +8,7 @@
 <style>
   body {
     font-family: 'Jua', sans-serif;
-    background-color: #fff6f0;
+    background-color: #fff6f0; /* 파스텔 톤 배경 */
     margin: 0;
     padding: 20px;
   }
@@ -43,7 +43,7 @@
   }
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
   }
   .card {
@@ -51,13 +51,6 @@
     border-radius: 15px;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  .card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 10px;
   }
   .card strong {
     display: block;
@@ -114,11 +107,6 @@
   const introList = document.getElementById("introList");
 
   const likedPosts = new Set();
-  const savedName = localStorage.getItem("myName");
-
-  if (savedName) {
-    nameInput.value = savedName;
-  }
 
   submitBtn.addEventListener("click", () => {
     const name = nameInput.value.trim();
@@ -127,20 +115,16 @@
     const intro = introInput.value.trim();
     if (!name || !hobby || !skill || !intro) return;
 
-    localStorage.setItem("myName", name);
-
-    const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
-
     push(introRef, {
       name,
       hobby,
       skill,
       intro,
       likes: 0,
-      author: name,
-      avatar: avatarUrl
+      author: name
     });
 
+    nameInput.value = "";
     hobbyInput.value = "";
     skillInput.value = "";
     introInput.value = "";
@@ -155,7 +139,6 @@
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <img src="${data.avatar || 'https://api.dicebear.com/7.x/bottts/svg'}" alt="프로필">
         <strong>${data.name}</strong>
         <div>취미: ${data.hobby}</div>
         <div>특기: ${data.skill}</div>
@@ -178,7 +161,7 @@
 
       const deleteBtn = card.querySelector(".deleteBtn");
       deleteBtn.addEventListener("click", () => {
-        const currentUser = localStorage.getItem("myName");
+        const currentUser = nameInput.value.trim();
         if (currentUser === data.author) {
           remove(ref(db, `introductions/${key}`));
         } else {
