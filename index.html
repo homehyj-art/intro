@@ -1,323 +1,177 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>💖 우리 반 자기소개</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리 반 자기소개</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-
   body {
-    font-family: 'Nanum Pen Script', cursive;
-    background-color: #ffe4e1; /* 부드러운 분홍 단색 */
-    padding: 20px;
+    font-family: 'Jua', sans-serif;
+    background-color: #fff6f0; /* 파스텔 톤 배경 */
     margin: 0;
-    min-height: 100vh;
+    padding: 20px;
   }
-
   h1 {
     text-align: center;
-    color: #ff6f91;
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px #fce4ec;
+    color: #ff7e7e;
   }
-
-  .input-container {
-    background: #fff0f5;
-    border-radius: 20px;
-    padding: 20px;
-    max-width: 480px;
-    margin: 0 auto 30px;
-    box-shadow: 0 5px 15px rgba(255,105,145,0.3);
-  }
-
-  input, textarea {
-    width: 90%;
-    padding: 10px;
-    margin: 10px auto;
+  .form-container {
+    background: white;
+    padding: 15px;
     border-radius: 15px;
-    border: 2px solid #ffb6c1;
-    display: block;
-    font-size: 1.1rem;
-    outline: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 0 auto 20px auto;
   }
-  textarea {
-    height: 70px;
-    resize: none;
+  input, textarea, button {
+    font-family: 'Jua', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
   }
-
   button {
-    background-color: #ff6f91;
+    background-color: #ffb6b9;
     border: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 10px 25px;
-    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
   }
   button:hover {
-    background-color: #ff4d72;
+    background-color: #ff999c;
   }
-
-  #introList {
-    max-width: 960px;
-    margin: 0 auto;
+  .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    max-height: 600px;
-    overflow-y: auto;
-    padding-bottom: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
   }
-
   .card {
-    background: #fff;
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(255,105,145,0.2);
-    position: relative;
-    font-size: 1.15rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
-
-  .card h3 {
-    color: #ff6f91;
-    margin: 0 0 6px 0;
+  .card strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #ff7e7e;
   }
-
-  .card p {
-    margin: 4px 0;
-    color: #555;
-    word-break: keep-all;
+  .buttons {
+    margin-top: 10px;
   }
-
-  .actions {
-    margin-top: 12px;
-    text-align: right;
-  }
-
-  .actions button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    margin-left: 10px;
-    transition: transform 0.15s ease;
-  }
-
-  .actions button:hover {
-    transform: scale(1.2);
-  }
-
-  .like-btn {
-    color: #ff6f91;
-  }
-
-  .delete-btn {
-    color: #aaa;
-  }
-
-  .like-animate {
-    animation: like-pop 0.4s ease forwards;
-  }
-
-  @keyframes like-pop {
-    0% { transform: scale(1); color: #ff6f91; }
-    50% { transform: scale(1.6); color: #ff416c; }
-    100% { transform: scale(1); color: #ff6f91; }
-  }
-
-  /* 모바일 대응: 카드 최소 크기 줄임 */
-  @media (max-width: 600px) {
-    #introList {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      max-height: 500px;
-    }
+  .buttons button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
   }
 </style>
 </head>
 <body>
 
-<h1>우리 반 자기소개 💌</h1>
-
-<div class="input-container">
-  <input type="text" id="nameInput" placeholder="이름을 입력하세요" maxlength="15" />
-  <input type="text" id="hobbyInput" placeholder="취미를 입력하세요" maxlength="30" />
-  <input type="text" id="skillInput" placeholder="특기를 입력하세요" maxlength="30" />
-  <textarea id="introInput" placeholder="간단한 자기소개를 작성하세요 (최대 100자)" maxlength="100"></textarea>
-  <button id="postBtn">자기소개 올리기</button>
+<h1>우리 반 자기소개</h1>
+<div class="form-container">
+  <input type="text" id="name" placeholder="이름" required>
+  <input type="text" id="hobby" placeholder="취미" required>
+  <input type="text" id="skill" placeholder="특기" required>
+  <textarea id="intro" placeholder="간단한 자기소개" required></textarea>
+  <button id="submitBtn">올리기</button>
 </div>
 
-<div id="introList"></div>
+<div class="card-grid" id="introList"></div>
 
-<!-- Firebase JS -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getDatabase, ref, push, set, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCtBTzq6aIgRzWDB2gfG2LBK19Y4TYCj4w",
-    authDomain: "summer-memory-bc163.firebaseapp.com",
-    databaseURL: "https://summer-memory-bc163-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "summer-memory-bc163",
-    storageBucket: "summer-memory-bc163.firebasestorage.app",
-    messagingSenderId: "1014179818008",
-    appId: "1:1014179818008:web:4570325a33a90582d2b16d"
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "YOUR_DB_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_BUCKET",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
   };
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
+  const introRef = ref(db, "introductions");
 
-  let currentUserName = "";
+  const submitBtn = document.getElementById("submitBtn");
+  const nameInput = document.getElementById("name");
+  const hobbyInput = document.getElementById("hobby");
+  const skillInput = document.getElementById("skill");
+  const introInput = document.getElementById("intro");
+  const introList = document.getElementById("introList");
 
-  const postBtn = document.getElementById("postBtn");
-  postBtn.addEventListener("click", () => {
-    const name = document.getElementById("nameInput").value.trim();
-    const hobby = document.getElementById("hobbyInput").value.trim();
-    const skill = document.getElementById("skillInput").value.trim();
-    const intro = document.getElementById("introInput").value.trim();
+  const likedPosts = new Set();
 
-    if (!name) {
-      alert("이름을 입력해주세요!");
-      return;
-    }
-    if (!hobby) {
-      alert("취미를 입력해주세요!");
-      return;
-    }
-    if (!skill) {
-      alert("특기를 입력해주세요!");
-      return;
-    }
-    if (!intro) {
-      alert("자기소개를 작성해주세요!");
-      return;
-    }
+  submitBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    const hobby = hobbyInput.value.trim();
+    const skill = skillInput.value.trim();
+    const intro = introInput.value.trim();
+    if (!name || !hobby || !skill || !intro) return;
 
-    currentUserName = name;
-
-    const newRef = push(ref(db, "introductions"));
-    set(newRef, {
-      name: name,
-      hobby: hobby,
-      skill: skill,
-      intro: intro,
+    push(introRef, {
+      name,
+      hobby,
+      skill,
+      intro,
       likes: 0,
-      likedBy: {},
       author: name
     });
 
-    // 입력창 초기화
-    document.getElementById("nameInput").value = "";
-    document.getElementById("hobbyInput").value = "";
-    document.getElementById("skillInput").value = "";
-    document.getElementById("introInput").value = "";
+    nameInput.value = "";
+    hobbyInput.value = "";
+    skillInput.value = "";
+    introInput.value = "";
   });
 
-  function renderComments() {
-    const listRef = ref(db, "introductions");
-    const list = document.getElementById("introList");
+  onValue(introRef, (snapshot) => {
+    introList.innerHTML = "";
+    snapshot.forEach((childSnapshot) => {
+      const data = childSnapshot.val();
+      const key = childSnapshot.key;
 
-    onValue(listRef, (snapshot) => {
-      list.innerHTML = "";
-      snapshot.forEach((childSnap) => {
-        const data = childSnap.val();
-        const id = childSnap.key;
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <strong>${data.name}</strong>
+        <div>취미: ${data.hobby}</div>
+        <div>특기: ${data.skill}</div>
+        <div>${data.intro}</div>
+        <div class="buttons">
+          <button class="likeBtn">👍 ${data.likes}</button>
+          <button class="deleteBtn">삭제</button>
+        </div>
+      `;
 
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        card.innerHTML = `
-          <h3>${escapeHtml(data.name)}</h3>
-          <p><b>취미:</b> ${escapeHtml(data.hobby)}</p>
-          <p><b>특기:</b> ${escapeHtml(data.skill)}</p>
-          <p><b>자기소개:</b> ${escapeHtml(data.intro)}</p>
-          <div class="actions">
-            <button class="like-btn" title="좋아요" data-id="${id}">👍 ${data.likes || 0}</button>
-            <button class="delete-btn" title="삭제" data-id="${id}">🗑️</button>
-          </div>
-        `;
-
-        list.appendChild(card);
+      const likeBtn = card.querySelector(".likeBtn");
+      likeBtn.addEventListener("click", () => {
+        if (likedPosts.has(key)) {
+          alert("이미 좋아요를 눌렀어요!");
+          return;
+        }
+        update(ref(db, `introductions/${key}`), { likes: data.likes + 1 });
+        likedPosts.add(key);
       });
 
-      // 좋아요 버튼 이벤트
-      document.querySelectorAll(".like-btn").forEach(btn => {
-        btn.onclick = async () => {
-          if (!currentUserName) {
-            alert("먼저 자기소개를 올려주세요!");
-            return;
-          }
-          const commentId = btn.getAttribute("data-id");
-          const commentRef = ref(db, "introductions/" + commentId);
-          const snapshot = await get(commentRef);
-          if (snapshot.exists()) {
-            const data = snapshot.val();
-            if (data.likedBy && data.likedBy[currentUserName]) {
-              alert("이미 좋아요를 누르셨어요!");
-              return;
-            }
-            const likedBy = data.likedBy || {};
-            likedBy[currentUserName] = true;
-            await update(commentRef, {
-              likes: (data.likes || 0) + 1,
-              likedBy: likedBy
-            });
-            // 애니메이션 효과
-            btn.classList.add("like-animate");
-            setTimeout(() => btn.classList.remove("like-animate"), 400);
-          }
-        };
+      const deleteBtn = card.querySelector(".deleteBtn");
+      deleteBtn.addEventListener("click", () => {
+        const currentUser = nameInput.value.trim();
+        if (currentUser === data.author) {
+          remove(ref(db, `introductions/${key}`));
+        } else {
+          alert("작성자만 삭제할 수 있습니다.");
+        }
       });
 
-      // 삭제 버튼 이벤트
-      document.querySelectorAll(".delete-btn").forEach(btn => {
-        btn.onclick = async () => {
-          if (!currentUserName) {
-            alert("먼저 자기소개를 올려주세요!");
-            return;
-          }
-          const commentId = btn.getAttribute("data-id");
-          const commentRef = ref(db, "introductions/" + commentId);
-          const snapshot = await get(commentRef);
-          if (snapshot.exists()) {
-            const data = snapshot.val();
-            if (data.author !== currentUserName) {
-              alert("본인만 삭제할 수 있어요!");
-              return;
-            }
-            if (confirm("정말 삭제하시겠어요?")) {
-              await remove(commentRef);
-            }
-          }
-        };
-      });
+      introList.appendChild(card);
     });
-  }
-
-  // XSS 방지용 간단 escape 함수
-  function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, function(m) {
-      return {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      }[m];
-    });
-  }
-
-  renderComments();
+  });
 </script>
 
 </body>
