@@ -168,15 +168,16 @@
 <div id="introList"></div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getDatabase, ref, push, set, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue, update, remove, get } 
+    from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCtBTzq6aIgRzWDB2gfG2LBK19Y4TYCj4w",
     authDomain: "summer-memory-bc163.firebaseapp.com",
-    databaseURL: "https://summer-memory-bc163-default-rtdb.asia-southeast1.firebasedatabase.app",
+    databaseURL: "https://summer-memory-bc163-default-rtdb.asia-southeast1.firebasedatabase.app", 
     projectId: "summer-memory-bc163",
-    storageBucket: "summer-memory-bc163.firebasestorage.app",
+    storageBucket: "summer-memory-bc163.appspot.com",
     messagingSenderId: "1014179818008",
     appId: "1:1014179818008:web:4570325a33a90582d2b16d"
   };
@@ -185,8 +186,8 @@
   const db = getDatabase(app);
 
   let currentUserName = localStorage.getItem("currentUserName") || "";
-  let currentSort = "latest"; // 기본 정렬: 최신순
-  let introData = []; // 메모리에 데이터 보관
+  let currentSort = "latest-desc"; // 기본 정렬: 최신순
+  let introData = [];
 
   const postBtn = document.getElementById("postBtn");
   postBtn.addEventListener("click", () => {
@@ -223,8 +224,10 @@
     list.innerHTML = "";
 
     let sorted = [...introData];
-    if (currentSort === "latest") {
-      sorted.sort((a, b) => b.timestamp - a.timestamp);
+    if (currentSort === "latest-desc") {
+      sorted.sort((a, b) => b.timestamp - a.timestamp); // 최신순
+    } else if (currentSort === "latest-asc") {
+      sorted.sort((a, b) => a.timestamp - b.timestamp); // 오래된 순
     } else if (currentSort === "likes") {
       sorted.sort((a, b) => (b.likes || 0) - (a.likes || 0));
     }
@@ -305,7 +308,13 @@
 
   // 정렬 버튼 이벤트
   document.getElementById("sortLatest").onclick = () => {
-    currentSort = "latest";
+    if (currentSort === "latest-desc") {
+      currentSort = "latest-asc";
+      document.getElementById("sortLatest").textContent = "정렬: 오래된순";
+    } else {
+      currentSort = "latest-desc";
+      document.getElementById("sortLatest").textContent = "정렬: 최신순";
+    }
     renderComments();
   };
   document.getElementById("sortLikes").onclick = () => {
@@ -323,4 +332,3 @@
 
 </body>
 </html>
-
